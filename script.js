@@ -215,9 +215,10 @@ postContainer.addEventListener("click", (e) => {
       id,
     };
     addToCart.push(allItem);
+    
+    updateCart();
+    calClutePrice();
   }
-  updateCart();
-  calClutePrice();
 });
 
 // Calclute Price
