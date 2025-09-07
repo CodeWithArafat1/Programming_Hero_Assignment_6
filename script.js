@@ -7,6 +7,11 @@ const totalPrice = document.getElementById("total-price");
 
 let addToCart = [];
 
+document.getElementById("toggle-btn").addEventListener("click", (e) => {
+  const categoryContainer = document.getElementById("category-container");
+  categoryContainer.classList.toggle("hidden");
+});
+
 // show loading
 const loading = (status) => {
   if (status) {
@@ -83,7 +88,7 @@ const loadPost = async (data) => {
       </div>
 
       <div class="card-actions mt-2">
-      <button class="btn bg-green-600 hover:bg-green-700 text-white rounded-full w-full text-base font-medium py-2 cart-btn" id="${plant.id}">
+      <button class="btn bg-green-600 hover:bg-green-700 text-white rounded-full w-full text-base font-medium py-2 cart-btn" data-id="${plant.id}">
       Add to Cart
       </button>
       </div>
@@ -147,16 +152,21 @@ const showDetails = async (id) => {
 
 // Show Post by Categoris
 categoryContainer.addEventListener("click", (e) => {
-  const allLi = document.querySelectorAll(".active-li");
-  allLi.forEach((li) => {
-    li.classList.remove("bg-green-700", "text-white");
-  });
-  postContainer.innerHTML = "";
   if (e.target.nodeName === "LI") {
+    const allLi = document.querySelectorAll(".active-li");
+    allLi.forEach((li) => {
+      li.classList.remove("bg-green-700", "text-white");
+    });
+
+    postContainer.innerHTML = "";
+
     const id = e.target.id;
     e.target.classList.add("bg-green-700", "text-white");
     loading(true);
     plantsByCategorie(id);
+
+    const categoryContainer = document.getElementById("category-container");
+    categoryContainer.classList.add("hidden");
   }
 });
 
@@ -184,7 +194,7 @@ postContainer.addEventListener("click", (e) => {
     const card = e.target.closest(".card-parent");
     const name = card.querySelector("h2").textContent;
     const getPrice = card.querySelector(".price").textContent;
-    const id = e.target.id;
+    const id = e.target.dataset.id;
     const price = parseInt(getPrice);
     const allItem = {
       name,
@@ -202,7 +212,7 @@ const calClutePrice = () => {
   const price = addToCart.reduce((sum, item) => (sum += item.price), 0);
   totalPrice.textContent = price;
 };
-
+// remove item form cart and update price
 const removeItem = (index) => {
   addToCart.splice(index, 1);
   updateCart();
