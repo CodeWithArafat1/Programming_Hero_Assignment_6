@@ -80,8 +80,8 @@ const sumArrow2 = (a, b) => a + b;
 
 ```javascript
 const person = {
-  firstName: 'John',
-  lastName: 'Doe',
+  firstName: 'Arafat',
+  lastName: 'Nill',
   age: 30
 };
 
