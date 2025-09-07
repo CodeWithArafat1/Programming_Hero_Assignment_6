@@ -189,8 +189,15 @@ const updateCart = () => {
     const div = document.createElement("div");
     div.innerHTML = `<div class="flex items-center justify-between bg-green-50 p-2 rounded-md">
                         <div class="flex-grow">
-                            <h3 class="font-semibold text-green-800 text-lg">${item.name}</h3>
-                            <p class="font-bold text-lg text-green-600">৳${item.price}</p>
+                            <h3 class="font-semibold text-green-800 text-lg">
+                                ${item.name} 
+                                <span class="text-sm font-normal text-gray-600">(x${
+                                  item.quantity
+                                })</span>
+                            </h3>
+                            <p class="font-bold text-lg text-green-600">৳${
+                              item.price * item.quantity
+                            }</p>
                         </div>
                         <button onclick="removeItem(${index})" class="btn btn-ghost btn-xs text-red-500 hover:bg-red-100 p-1">
                            <i class="ri-close-line text-lg"></i>
@@ -208,14 +215,21 @@ postContainer.addEventListener("click", (e) => {
     const getPrice = card.querySelector(".price").textContent;
     const id = e.target.dataset.id;
     const price = parseInt(getPrice);
+
+    const existingItem = addToCart.find((item) => item.id === id);
+
+    if (existingItem) {
+      existingItem.quantity++;
+    } else {
+      const allItem = {
+        name,
+        price,
+        id,
+        quantity: 1,
+      };
+      addToCart.push(allItem);
+    }
     alert(`${name} has been added to the cart.`);
-    const allItem = {
-      name,
-      price,
-      id,
-    };
-    addToCart.push(allItem);
-    
     updateCart();
     calClutePrice();
   }
@@ -223,7 +237,10 @@ postContainer.addEventListener("click", (e) => {
 
 // Calclute Price
 const calClutePrice = () => {
-  const price = addToCart.reduce((sum, item) => (sum += item.price), 0);
+  const price = addToCart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
   totalPrice.textContent = price;
 };
 // remove item form cart and update price
