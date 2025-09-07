@@ -82,7 +82,7 @@ const sumArrow2 = (a, b) => a + b;
 const person = {
   firstName: 'Arafat',
   lastName: 'Nill',
-  age: 30
+  age: 21
 };
 
 
