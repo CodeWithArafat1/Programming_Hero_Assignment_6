@@ -1,85 +1,4 @@
-<!-- ## 1) Difference between `var`, `let`, and `const`
 
-- **`var`**
-
-  - Function-scoped.
-  - Can be redeclared and updated.
-  - Hoisted (initialized with `undefined`).
-
-- **`let`**
-
-  - Block-scoped.
-  - Can be updated but **cannot be redeclared** in the same scope.
-  - Not initialized until its definition is evaluated (Temporal Dead Zone).
-
-- **`const`**
-
-  - Block-scoped.
-  - Cannot be updated or redeclared.
-  - Must be initialized at the time of declaration.
-  - For objects and arrays, the **reference cannot change**, but the content can be modified.
-
-  2. Difference between map(), forEach(), and filter()
-
--**`forEach()`**
-
-- Executes a function on each array element.
-- Does not return a new array (returns undefined).
-
--**`map()`**
-
-- Executes a function on each array element.
-- Returns a new array containing the results.
-
--**`filter()`**
-
-- Executes a function on each array element.
-- Returns a new array containing elements that pass a condition.
-
-## 3) Arrow Functions in ES6
-
-- Arrow functions provide a shorter syntax to write functions and do not have their own this context.
-- Syntax:
-  // Traditional function
-  function sum(a, b) {
-  return a + b;
-  }
-
-// Arrow function
-const sum = (a, b) => a + b;
-
-- Single expression returns automatically.
-- No binding of this, arguments, or super.
-
-## 4) Destructuring Assignment in ES6
-
-Destructuring allows extracting values from arrays or objects into separate variables.
-
-Array Destructuring:
-
-const arr = [1, 2, 3];
-const [a, b] = arr;
-console.log(a, b); // 1 2
-
-
-5) Template Literals in ES6
-
-Template literals provide an easier way to create strings with interpolation and multi-line support.
-
-Syntax:
-
-const name = 'Alice';
-const age = 25;
-
-// Using template literals
-const message = `Hello, my name is ${name} and I am ${age} years old.`;
-console.log(message);
-
-Differences from string concatenation:
-
-Uses backticks ` instead of quotes.
-
-Supports ${} for embedding expressions. -->
 
 ## 1. Difference between `var`, `let`, and `const`
 
@@ -159,7 +78,7 @@ const sumArrow2 = (a, b) => a + b;
 
 - Destructuring is a convenient way to extract values from arrays or properties from objects into distinct variables.
 
-```
+```javascript
 const person = {
   firstName: 'John',
   lastName: 'Doe',
@@ -175,7 +94,7 @@ console.log(firstName, age);
 
 - Template literals or template strings provide an enhanced syntax for working with strings, allowing for embedded expressions and multi-line strings.
 
-```
+```javascript
 const name = 'Arafat Nill';
 const age = 21;
 
