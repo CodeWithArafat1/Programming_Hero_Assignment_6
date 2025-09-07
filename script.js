@@ -84,7 +84,7 @@ const loadPost = async (data) => {
       <span class="inline-block bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">
       ${plant.category}
       </span>
-      <span class="text-gray-900 font-bold">৳<span class="price">${plant.price}</span></span>
+      <span class="text-lg font-bold text-green-600">৳<span class="price ">${plant.price}</span></span>
       </div>
 
       <div class="card-actions mt-2">
@@ -196,6 +196,7 @@ postContainer.addEventListener("click", (e) => {
     const getPrice = card.querySelector(".price").textContent;
     const id = e.target.dataset.id;
     const price = parseInt(getPrice);
+    alert(`${name} has been added to the cart.`)
     const allItem = {
       name,
       price,
