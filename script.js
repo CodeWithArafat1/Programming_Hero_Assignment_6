@@ -26,10 +26,18 @@ const loading = (status) => {
 // Load Category
 const loadCategory = async () => {
   try {
+    categoryContainer.innerHTML = "";
+    const allTypesLi = document.createElement("li");
+    allTypesLi.id = "all-types";
+    allTypesLi.className =
+      "hover:bg-green-700 hover:text-white rounded-lg cursor-pointer px-3 py-2 active-li bg-green-700 text-white";
+    allTypesLi.textContent = "All Types";
+    categoryContainer.appendChild(allTypesLi);
+
     const url = "https://openapi.programming-hero.com/api/categories";
     const res = await fetch(url);
     const data = await res.json();
-    categoryContainer.innerHTML = "";
+
     data.categories.forEach((cat) => {
       const li = document.createElement("li");
       li.id = cat.id;
@@ -163,7 +171,11 @@ categoryContainer.addEventListener("click", (e) => {
     const id = e.target.id;
     e.target.classList.add("bg-green-700", "text-white");
     loading(true);
-    plantsByCategorie(id);
+    if (id === "all-types") {
+      fetchAllPost();
+    } else {
+      plantsByCategorie(id);
+    }
 
     const categoryContainer = document.getElementById("category-container");
     categoryContainer.classList.add("hidden");
@@ -181,7 +193,7 @@ const updateCart = () => {
                             <p class="font-bold text-lg text-green-600">৳${item.price}</p>
                         </div>
                         <button onclick="removeItem(${index})" class="btn btn-ghost btn-xs text-red-500 hover:bg-red-100 p-1">
-                           <i class="ri-delete-bin-6-line text-lg"></i>
+                           <i class="ri-close-line text-lg"></i>
                         </button>
                     </div>`;
     cartContainer.appendChild(div);
@@ -196,7 +208,7 @@ postContainer.addEventListener("click", (e) => {
     const getPrice = card.querySelector(".price").textContent;
     const id = e.target.dataset.id;
     const price = parseInt(getPrice);
-    alert(`${name} has been added to the cart.`)
+    alert(`${name} has been added to the cart.`);
     const allItem = {
       name,
       price,
@@ -219,6 +231,5 @@ const removeItem = (index) => {
   updateCart();
   calClutePrice();
 };
-
 fetchAllPost();
 loadCategory();
